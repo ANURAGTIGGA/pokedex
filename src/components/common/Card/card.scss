@@ -1,0 +1,43 @@
+.card-wrap{
+    width: 300px;
+    height: 300px;
+    padding-top: 50px;
+    margin-bottom: 20px;
+    .card{
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        position: relative;
+        height: 100%;
+        img{
+            width: 200px;
+            position: absolute;
+            top: -50px;
+            transform: translateX(25%);
+        }
+        div.content{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            .id{
+                font-size: 22px;
+            }
+            .name{
+                font-size: 26px;
+                font-weight: 600;
+            }
+            .type{
+                display: inline-block;
+                padding: 5px;
+                border-radius: 15px;
+                background-color: white;
+                margin: 0 5px;
+            }
+        }
+
+        &.grass{
+            background-image: linear-gradient(to top right, #3ccc82, #a9e8c8);
+        }
+    }
+}

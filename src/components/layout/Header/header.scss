@@ -1,0 +1,29 @@
+.header-container{
+    padding: 15px 0;
+    display: flex;
+    > * { 
+        flex: 1; 
+    }
+
+    .logo-wrap{
+        img {    
+            height: 60px;
+        }
+    }
+
+    .navigation-wrap{
+        flex: 3;
+        ul{
+            list-style: none;
+            display: flex;
+            justify-content: flex-start;
+            li {
+                flex: 1;
+            }
+        }
+    }
+
+    .serach-wrap{
+        flex: 2;
+    }
+}
