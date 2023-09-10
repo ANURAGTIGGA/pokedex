@@ -7,12 +7,12 @@
         &.grass{
             background-image: linear-gradient(to top right, #3ccc82, #a9e8c8);
         }
-        img{
+        img.pokemon-img{
             transform: translate(-50px, -50px);
             flex: 1;
         }
         .content{
-            padding: 20px 0;
+            padding: 20px 20px;
             flex: 1;
             .id{
                 font-size: 22px;
@@ -39,7 +39,7 @@
                 border: 1px solid white;
                 border-radius: 5px;
                 padding: 15px;
-                margin: 15px 15px 0 0;
+                margin-top: 15px;
                 display: flex;
                 gap: 0px 10px;
                 .stat{
@@ -67,6 +67,20 @@
                                 text-transform: uppercase;
                             }
                         }
+                    }
+                }
+            }
+            p{color: white;}
+            .evolutions{
+                display: flex;
+                .pokemon{
+                    flex:1;
+                    img{
+                        height: 80px;
+                        width: 80px;
+                        border: 1px solid white;
+                        border-radius: 5px;
+                        padding: 15px;
                     }
                 }
             }
