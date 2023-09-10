@@ -1,5 +1,6 @@
 import './header.scss';
 import pokedexLogo from '../../../assets/images/pokedex.png';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
     const navList = ['Home', 'Legendary', 'Type']
@@ -8,8 +9,10 @@ export default function Header() {
         <header>
             <div className="header-container">
                 <div className="logo-wrap">
-                    <img src={pokedexLogo} />
-                    <span></span>
+                    <Link to="/">
+                        <img src={pokedexLogo} />
+                        <span></span>
+                    </Link>
                 </div>
                 <div className="navigation-wrap">
                     <ul>

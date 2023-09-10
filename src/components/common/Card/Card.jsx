@@ -7,7 +7,7 @@ export default function Card({pokemon}) {
             <div className='card grass'>
                 <img src={pokemon.data.sprites.other.dream_world.front_default} />
                 <div className='content'>
-                    <div className='id's>#{pokemon.data.id}</div>
+                    <div className='id'>#{pokemon.data.id}</div>
                     <div className='name'>{pokemon.data.name}</div>
                     <div>
                         {pokemon.data.types && pokemon.data.types.map((type,index)=>{

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios";
 import Card from "../../common/Card/Card";
 import './home.scss';
+import { Link } from "react-router-dom";
 
 export default function Home() {
     const [pokemons, setPokemons] = useState(null);
@@ -37,13 +38,20 @@ export default function Home() {
         fetchPokemons();
     },[])
 
+    function getLinkPath(id) {
+        debugger;
+        // /pokemon/{pokemon.data.id}
+    }
+
     return (
         <>
             <div className='todays-pokemons'>
             {
                 pokemons && pokemons.map((pokemon)=>{
                     return (
-                        <Card key={pokemon.id} pokemon={pokemon}></Card>
+                        <Link to={`/pokemon/${pokemon.data.id}`} key={pokemon.data.id} >
+                            <Card pokemon={pokemon}></Card>
+                        </Link>
                     )
                 })
             }

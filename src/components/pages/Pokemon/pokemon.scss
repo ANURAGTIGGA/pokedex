@@ -1,0 +1,76 @@
+#pokemon{
+    padding: 60px 0 0 60px;
+    .card{
+        height: 500px;
+        border-radius: 10px;
+        display: flex;
+        &.grass{
+            background-image: linear-gradient(to top right, #3ccc82, #a9e8c8);
+        }
+        img{
+            transform: translate(-50px, -50px);
+            flex: 1;
+        }
+        .content{
+            padding: 20px 0;
+            flex: 1;
+            .id{
+                font-size: 22px;
+                color: white;
+            }
+            .name{
+                font-size: 40px;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: white;
+                margin-bottom: 5px;
+            }
+            .type{
+                display: inline-block;
+                padding: 4px 8px;
+                border-radius: 15px;
+                background-color: white;
+                margin: 0 5px;
+                line-height: 1;
+                font-size: 14px;
+                text-transform: uppercase;
+            }
+            .stats{
+                border: 1px solid white;
+                border-radius: 5px;
+                padding: 15px;
+                margin: 15px 15px 0 0;
+                display: flex;
+                gap: 0px 10px;
+                .stat{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px 0;
+                    color: white;
+                    .label{
+                        font-size: 14px;
+                    }
+                    .value{
+                        font-size: 16px;
+                        font-weight: 600;
+                    }
+                    &.abilities{
+                        flex: 2;
+                        .value{
+                            width: 210px;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            .ability{
+                                margin-right: 5px;
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
