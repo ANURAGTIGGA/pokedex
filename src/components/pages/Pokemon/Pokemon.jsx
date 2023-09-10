@@ -9,6 +9,7 @@ export default function Pokemon() {
     const [pokemon, setPokemon] = useState(null);
     const [evolution, setEvolution] = useState([]);
     const imgUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
+    const fallbackUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
     const url = "https://pokeapi.co/api/v2/pokemon/";
 
     useEffect(()=>{
@@ -36,6 +37,7 @@ export default function Pokemon() {
             const id = temp[temp.length-2]
             return {
                 url: imgUrl + id + '.svg',
+                fallback: fallbackUrl + id + '.png',
                 id
             }
         }
@@ -49,7 +51,7 @@ export default function Pokemon() {
             {
                 pokemon ? (
                     <div className='card grass'>
-                        <img className='pokemon-img' src={pokemon.sprites.other.dream_world.front_default} />
+                        <img className='pokemon-img' src={pokemon.sprites.other.dream_world.front_default || pokemon.sprites.other['official-artwork'].front_default} />
                         <div className='content'>
                             <div className='id'>#{pokemon.id}</div>
                             <div className='name'>{pokemon.name}</div>
@@ -89,7 +91,7 @@ export default function Pokemon() {
                                             return (
                                                 <div key={item.id} className='pokemon'>
                                                     <Link to={`/pokemon/${item.id}`}>
-                                                        <img onClick={()=>setPokeId(item.id)} src={item.url}></img>
+                                                        <img onClick={()=>setPokeId(item.id)} src={pokemon.sprites.other.dream_world.front_default ? item.url : item.fallback} ></img>
                                                     </Link>
                                                 </div>
                                             )

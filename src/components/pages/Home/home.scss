@@ -1,4 +1,9 @@
-.todays-pokemons{
-    display: flex;
-    justify-content: space-around;
+#home{
+    h1{
+        text-align: center;
+    }
+    .todays-pokemons{
+        display: flex;
+        justify-content: space-around;
+    }
 }

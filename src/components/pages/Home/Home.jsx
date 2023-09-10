@@ -8,43 +8,48 @@ export default function Home() {
     const [pokemons, setPokemons] = useState(null);
     const [todaysPokemons, setTodaysPokemons] = useState(null);
     const url = "https://pokeapi.co/api/v2/pokemon/"//"https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"
-    let random = [1,2,3];
 
     useEffect(()=>{
-        function fetchPokemons() {
+        function fetchPokemons(randomList) {
             let promises = [];
-            for(let i=0;i<random.length;i++){
-                promises.push(axios.get(url+random[i]))
+            for(let i=0;i<randomList.length;i++){
+                promises.push(axios.get(url+randomList[i]))
             }
 
             Promise.all(promises).then((results) => {
                 setPokemons(results)
             })
-            // const res = await axios.get(url);
-            // console.log("result ", res);
-            // setPokemons(res.data.results);
         }
 
         async function fetchTodaysPokemons() {
-            let random = [1,2,3];
-            // for(let i=0;i<3;i++){
-            //     random.push(Math.floor(Math.random()*151))
-            // }
+            const random = todaysPokemons || generateRandom();
             console.log(random);
-            setTodaysPokemons(random)
+            fetchPokemons(random);
+            setTodaysPokemons(random);
+        }
+
+        function generateRandom() {
+            let random = [];
+            let date = new Date();
+            const limit = localStorage.getItem('randomLimit');
+            const randomLimit = date.getMonth().toString() + date.getDate().toString();
+            if(limit === randomLimit) return localStorage.getItem('randomList').split(',');
+            
+            for(let i=0;i<3;i++){
+                random.push(Math.floor(Math.random()*randomLimit))
+            }
+            localStorage.setItem('randomLimit', randomLimit);
+            localStorage.setItem('randomList', random);
+
+            return random;
         }
 
         fetchTodaysPokemons();
-        fetchPokemons();
     },[])
 
-    function getLinkPath(id) {
-        debugger;
-        // /pokemon/{pokemon.data.id}
-    }
-
     return (
-        <>
+        <div id='home'>
+            <h1>TODAY'S POKEMONS</h1>
             <div className='todays-pokemons'>
             {
                 pokemons && pokemons.map((pokemon)=>{
@@ -56,6 +61,6 @@ export default function Home() {
                 })
             }
             </div>
-        </>
+        </div>
     )
 }

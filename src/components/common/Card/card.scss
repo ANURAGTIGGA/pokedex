@@ -10,10 +10,9 @@
         height: 100%;
         cursor: pointer;
         img{
-            width: 200px;
-            position: absolute;
-            top: -50px;
-            transform: translateX(25%);
+            max-width: 225px;
+            max-height: 225px;
+            transform: translate(25%,-20%);
         }
         div.content{
             position: absolute;
