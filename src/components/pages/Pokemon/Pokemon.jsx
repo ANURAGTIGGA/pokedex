@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "./pokemon.scss";
+import  PokemonContext from "../../../context/pokemonContext.js";
 
 export default function Pokemon() {
     const {id} = useParams();
@@ -11,10 +12,20 @@ export default function Pokemon() {
     const imgUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
     const fallbackUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
     const url = "https://pokeapi.co/api/v2/pokemon/";
+    const {selectedPokemon, setSelectedPokemon} = useContext(PokemonContext);
+
+    const shouldFetch = useRef(true);
+    const evolutionClicked = useRef(false);
 
     useEffect(()=>{
         async function fetchPokemonData() {
-            const res = await axios.get(`${url + pokeId}`);
+            let res;
+            if(selectedPokemon.data && !evolutionClicked.current){
+                res = selectedPokemon;
+            } else {
+                res = await axios.get(`${url + pokeId}`);
+            }
+            
             console.log("result ", res);
             const species = await axios.get(res.data.species.url);
             const evolutionRes = await axios.get(species.data.evolution_chain.url);
@@ -41,10 +52,19 @@ export default function Pokemon() {
                 id
             }
         }
-
-        fetchPokemonData()
+        
+        if(shouldFetch.current){
+            shouldFetch.current = false;
+            fetchPokemonData();
+            evolutionClicked.current = false;
+        }
     },[pokeId])
 
+    function onHandleEvolutionClick(id) {
+        shouldFetch.current = true;
+        evolutionClicked.current = true;
+        setPokeId(id);
+    }
 
     return (
         <div id='pokemon'>
@@ -91,7 +111,7 @@ export default function Pokemon() {
                                             return (
                                                 <div key={item.id} className='pokemon'>
                                                     <Link to={`/pokemon/${item.id}`}>
-                                                        <img onClick={()=>setPokeId(item.id)} src={pokemon.sprites.other.dream_world.front_default ? item.url : item.fallback} ></img>
+                                                        <img onClick={()=>onHandleEvolutionClick(item.id)} src={pokemon.sprites.other.dream_world.front_default ? item.url : item.fallback} ></img>
                                                     </Link>
                                                 </div>
                                             )

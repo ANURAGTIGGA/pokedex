@@ -1,9 +1,42 @@
 import './header.scss';
 import pokedexLogo from '../../../assets/images/pokedex.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRef, useState, useEffect, useContext } from 'react';
+import axios from "axios";
+import  PokemonContext from "../../../context/pokemonContext.js";
 
 export default function Header() {
-    const navList = ['Home', 'Legendary', 'Type']
+    const navList = ['Home', 'Legendary', 'Type'];
+    const [inputPokemon, setInputPokemon] = useState('')
+    const pokemonRef = useRef('');
+    const navigate = useNavigate();
+    const url = "https://pokeapi.co/api/v2/pokemon/";
+    const shouldFetch = useRef(false);
+    const { setSelectedPokemon } = useContext(PokemonContext);
+
+    useEffect(()=>{
+        async function fetchPokemon() {
+            const res = await axios.get(`${url + inputPokemon}`);
+            console.log('search pokemon', res);
+            await setSelectedPokemon(res);
+            navigate('/pokemon/'+inputPokemon);
+        }
+
+        if(shouldFetch.current){
+            shouldFetch.current = false;
+            fetchPokemon();
+        }
+    },[inputPokemon])
+
+    function redirectToPokemonPage() {
+        const input = pokemonRef.current.value;
+        if(input.length){
+            setInputPokemon(input);
+            shouldFetch.current = true;
+            pokemonRef.current.value = "";
+            //navigate('/pokemon/'+input);
+        }
+    }
 
     return (
         <header>
@@ -26,7 +59,14 @@ export default function Header() {
                     </ul>
                 </div>
                 <div className="search-wrap">
-                    <input type="text" placeholder="Search a Pokemon"></input>
+                    {/* <input ref={inputPokemon} type="text" placeholder="Search a Pokemon"></input> */}
+                    {/* <Link to={`/pokemon/`+inputPokemon.current.value} >
+                            Go
+                        </Link> 
+                        onChange={(e)=>setInputPokemon(e.target.value)}
+                        */}
+                    <input ref={pokemonRef} type="text" placeholder="Search a Pokemon"></input>
+                    <button onClick={redirectToPokemonPage}>Go</button>
                 </div>
             </div>
         </header>

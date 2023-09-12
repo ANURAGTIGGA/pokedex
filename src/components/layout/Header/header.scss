@@ -23,7 +23,24 @@
         }
     }
 
-    .serach-wrap{
+    .search-wrap{
         flex: 2;
+        display: flex;
+        gap: 3px;
+        align-items: center;
+        input{
+            padding: 10px;
+            border: 0;
+            outline: 0;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            flex: 2;
+        }
+        button{
+            padding: 10px;
+            border: 0;
+            border-radius: 50%;
+            cursor: pointer;
+        }
     }
 }

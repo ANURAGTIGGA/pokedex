@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import axios from "axios";
 import Card from "../../common/Card/Card";
 import './home.scss';
 import { Link } from "react-router-dom";
+import  PokemonContext from "../../../context/pokemonContext.js";
 
 export default function Home() {
     const [pokemons, setPokemons] = useState(null);
     const [todaysPokemons, setTodaysPokemons] = useState(null);
     const url = "https://pokeapi.co/api/v2/pokemon/"//"https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"
+    const { setSelectedPokemon } = useContext(PokemonContext);
+
+    const shouldFetch = useRef(true);
 
     useEffect(()=>{
         function fetchPokemons(randomList) {
@@ -21,7 +25,7 @@ export default function Home() {
             })
         }
 
-        async function fetchTodaysPokemons() {
+        function fetchTodaysPokemons() {
             const random = todaysPokemons || generateRandom();
             console.log(random);
             fetchPokemons(random);
@@ -44,8 +48,15 @@ export default function Home() {
             return random;
         }
 
-        fetchTodaysPokemons();
+        if(shouldFetch.current){
+            shouldFetch.current = false;
+            fetchTodaysPokemons();
+        }
     },[])
+
+    function onHandleCardClick(pokemon){
+        setSelectedPokemon(pokemon);
+    }
 
     return (
         <div id='home'>
@@ -54,7 +65,7 @@ export default function Home() {
             {
                 pokemons && pokemons.map((pokemon)=>{
                     return (
-                        <Link to={`/pokemon/${pokemon.data.id}`} key={pokemon.data.id} >
+                        <Link to={`/pokemon/${pokemon.data.id}`} onClick={()=>onHandleCardClick(pokemon)} key={pokemon.data.id} >
                             <Card pokemon={pokemon}></Card>
                         </Link>
                     )
