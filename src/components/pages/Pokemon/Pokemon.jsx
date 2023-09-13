@@ -3,12 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "./pokemon.scss";
 import  PokemonContext from "../../../context/pokemonContext.js";
+import Loader from "../../common/Loader/Loader";
 
 export default function Pokemon() {
     const {id} = useParams();
     const [pokeId, setPokeId] = useState(id)
     const [pokemon, setPokemon] = useState(null);
     const [evolution, setEvolution] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const imgUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
     const fallbackUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
     const url = "https://pokeapi.co/api/v2/pokemon/";
@@ -41,6 +43,7 @@ export default function Pokemon() {
             console.log('evolution', evolution)
             setPokemon(res.data);
             setEvolution(evolution);
+            setIsLoading(false);
         }
 
         function getImgUrl(url) {
@@ -55,6 +58,7 @@ export default function Pokemon() {
         
         if(shouldFetch.current){
             shouldFetch.current = false;
+            setIsLoading(true);
             fetchPokemonData();
             evolutionClicked.current = false;
         }
@@ -70,7 +74,7 @@ export default function Pokemon() {
         <div id='pokemon'>
             {
                 pokemon ? (
-                    <div className='card grass'>
+                    <div className={pokemon.types[0].type.name + ' card'}>
                         <img className='pokemon-img' src={pokemon.sprites.other.dream_world.front_default || pokemon.sprites.other['official-artwork'].front_default} />
                         <div className='content'>
                             <div className='id'>#{pokemon.id}</div>
@@ -78,7 +82,7 @@ export default function Pokemon() {
                             <div>
                                 {pokemon.types && pokemon.types.map((type,index)=>{
                                     return (
-                                        <span key={index} className='type'>{type.type.name}</span>
+                                        <span key={index} className={type.type.name + ' type'}>{type.type.name}</span>
                                     )
                                 })}
                             </div>
@@ -121,7 +125,7 @@ export default function Pokemon() {
                         </div>    
                     </div>
                 ) : (
-                    <p>...Loading</p>
+                    <Loader></Loader>
                 )
             }
         </div>

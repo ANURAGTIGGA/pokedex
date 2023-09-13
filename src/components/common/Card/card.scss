@@ -38,16 +38,16 @@
                 display: inline-block;
                 padding: 2px 5px;
                 border-radius: 15px;
-                background-color: white;
+                background-color: transparent;
                 margin: 0 5px;
                 line-height: 1;
                 font-size: 12px;
                 text-transform: uppercase;
+                background-color: transparent;
+                color: #fff;
+                border: 1px solid white;
+                font-weight: 600;
             }
-        }
-
-        &.grass{
-            background-image: linear-gradient(to top right, #3ccc82, #a9e8c8);
-        }
+        } 
     }
 }

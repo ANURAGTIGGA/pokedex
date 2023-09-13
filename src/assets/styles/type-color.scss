@@ -1,0 +1,60 @@
+@use './base';
+
+@mixin card-bg($primary,$secondary) {
+    background-image: linear-gradient(to top right, $primary, $secondary);
+}
+
+.normal{
+    @include card-bg($primary: base.$normal-primary, $secondary: base.$normal-secondary);
+}
+.fighting{
+    @include card-bg($primary: base.$fighting-primary, $secondary: base.$fighting-secondary);
+}
+.flying{
+    @include card-bg($primary: base.$flying-primary, $secondary: base.$flying-secondary);
+}
+.poison{
+    @include card-bg($primary: base.$poison-primary, $secondary: base.$poison-secondary);
+}
+.ground{
+    @include card-bg($primary: base.$ground-primary, $secondary: base.$ground-secondary);
+}
+.rock{
+    @include card-bg($primary: base.$rock-primary, $secondary: base.$rock-secondary);
+}
+.bug{
+    @include card-bg($primary: base.$bug-primary, $secondary: base.$bug-secondary);
+}
+.ghost{
+    @include card-bg($primary: base.$ghost-primary, $secondary: base.$ghost-secondary);
+}
+.steel{
+    @include card-bg($primary: base.$steel-primary, $secondary: base.$steel-secondary);
+}
+.fire{
+    @include card-bg($primary: base.$fire-primary, $secondary: base.$fire-secondary);
+}
+.water{
+    @include card-bg($primary: base.$water-primary, $secondary: base.$water-secondary);
+}
+.grass{
+    @include card-bg($primary: base.$grass-primary, $secondary: base.$grass-secondary);
+}
+.electric{
+    @include card-bg($primary: base.$electric-primary, $secondary: base.$electric-secondary);
+}
+.psychic{
+    @include card-bg($primary: base.$psychic-primary, $secondary: base.$psychic-secondary);
+}
+.ice{
+    @include card-bg($primary: base.$ice-primary, $secondary: base.$ice-secondary);
+}
+.dragon{
+    @include card-bg($primary: base.$dragon-primary, $secondary: base.$dragon-secondary);
+}
+.dark{
+    @include card-bg($primary: base.$dark-primary, $secondary: base.$dark-secondary);
+}
+.fairy{
+    @include card-bg($primary: base.$fairy-primary, $secondary: base.$fairy-secondary);
+}  

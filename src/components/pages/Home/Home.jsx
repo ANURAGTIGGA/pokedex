@@ -4,10 +4,12 @@ import Card from "../../common/Card/Card";
 import './home.scss';
 import { Link } from "react-router-dom";
 import  PokemonContext from "../../../context/pokemonContext.js";
+import Loader from "../../common/Loader/Loader";
 
 export default function Home() {
     const [pokemons, setPokemons] = useState(null);
     const [todaysPokemons, setTodaysPokemons] = useState(null);
+    const [loading, setLoading] = useState(true);
     const url = "https://pokeapi.co/api/v2/pokemon/"//"https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"
     const { setSelectedPokemon } = useContext(PokemonContext);
 
@@ -21,7 +23,8 @@ export default function Home() {
             }
 
             Promise.all(promises).then((results) => {
-                setPokemons(results)
+                setPokemons(results);
+                setLoading(false);
             })
         }
 
@@ -59,6 +62,7 @@ export default function Home() {
     }
 
     return (
+        <>
         <div id='home'>
             <h1>TODAY'S POKEMONS</h1>
             <div className='todays-pokemons'>
@@ -73,5 +77,9 @@ export default function Home() {
             }
             </div>
         </div>
+        {
+            loading && <Loader></Loader>
+        }
+        </>
     )
 }
