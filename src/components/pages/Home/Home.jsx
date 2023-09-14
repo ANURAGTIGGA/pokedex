@@ -5,6 +5,7 @@ import './home.scss';
 import { Link } from "react-router-dom";
 import  PokemonContext from "../../../context/pokemonContext.js";
 import Loader from "../../common/Loader/Loader";
+import Regions from "../../common/Regions/Regions";
 
 export default function Home() {
     const [pokemons, setPokemons] = useState(null);
@@ -75,6 +76,11 @@ export default function Home() {
                     )
                 })
             }
+            </div>
+            <div>
+                {
+                    <Regions></Regions>
+                }
             </div>
         </div>
         {

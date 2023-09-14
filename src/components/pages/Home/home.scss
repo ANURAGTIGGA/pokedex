@@ -1,9 +1,12 @@
 #home{
+    display: flex;
+    flex-direction: column;
     h1{
         text-align: center;
     }
     .todays-pokemons{
         display: flex;
         justify-content: space-around;
+        flex-basis: 370px;
     }
 }
