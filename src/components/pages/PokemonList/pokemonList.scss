@@ -1,0 +1,15 @@
+.pokemon-container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pokemon-list{
+    h1{
+        text-align: center;
+        .region-name{
+            text-transform: capitalize;
+        }
+    }
+}
