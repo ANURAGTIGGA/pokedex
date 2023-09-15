@@ -21,7 +21,7 @@ export default function Regions() {
             {
                 regions.map((region)=>{
                     return (
-                        <Link to={`/pokemon/${region.name}`}>
+                        <Link to={`/pokemons/${region.name}`}>
                             <div key={region.name} className='region'>{region.name}</div>
                         </Link>
                     )

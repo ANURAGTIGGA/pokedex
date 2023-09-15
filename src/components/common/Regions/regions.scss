@@ -4,6 +4,7 @@
     align-items: center;
     img{
         height: 75px;
+        margin-bottom: 20px;
         animation: grow 2s linear infinite;
     }
     .region-list {
@@ -12,12 +13,21 @@
         flex-wrap: wrap;
         justify-content: space-around;
         gap: 15px 15px;
-        .region{
+        a{
             flex: 1;
             padding: 15px;
             text-align: center;
             text-transform: uppercase;
             flex-basis: 15%;
+            text-decoration: none;
+            color: cornflowerblue;
+            background-color: aliceblue;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            &:hover{
+                background-color: #f4faff;
+                border-color: #909499;
+            }
         }
     }
 }

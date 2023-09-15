@@ -14,7 +14,7 @@ function App() {
         <Header></Header>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/pokemon/:region" element={<PokemonList />} />
+          <Route path="/pokemons/:region" element={<PokemonList />} />
           <Route path="/pokemon/:id" element={<Pokemon />} />
         </Routes>
       </Layout>
