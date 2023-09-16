@@ -31,7 +31,6 @@ export default function Home() {
 
         function fetchTodaysPokemons() {
             const random = todaysPokemons || generateRandom();
-            console.log(random);
             fetchPokemons(random);
             setTodaysPokemons(random);
         }

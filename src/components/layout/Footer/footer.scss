@@ -1,0 +1,15 @@
+footer{
+    width: 100%;
+    padding: 15px 0;
+    //background-color: darkseagreen;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    div{
+        padding: 0 15px;
+    }
+    .about-me-link{
+        text-decoration: none;
+        color: #000;
+    }
+}

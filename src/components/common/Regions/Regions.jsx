@@ -15,13 +15,13 @@ export default function Regions() {
 
     return (
         <div className='regions'>
-            <h3>Select a Region below to explore more Pokemons !!</h3>
+            <p className='regions-note'>Select a Region below to explore more Pokemons !!</p>
             <img onMouseEnter={onHandleScroll} src={pokeball} />
             <div className='region-list' ref={regionList}>
             {
                 regions.map((region)=>{
                     return (
-                        <Link to={`/pokemons/${region.name}`}>
+                        <Link to={`/pokemons/${region.name}`} key={region.name}>
                             <div key={region.name} className='region'>{region.name}</div>
                         </Link>
                     )

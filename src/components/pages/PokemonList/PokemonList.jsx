@@ -37,7 +37,6 @@ export default function PokemonList() {
             fetchPokemons(finalEntries);
         }
         async function fetchPokemons(entries) {
-            console.log(entries);
             let promises = [];
             for(let i=0;i<entries.length;i++){
                 promises.push(axios.get(url+entries[i]));

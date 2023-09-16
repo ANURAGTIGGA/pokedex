@@ -28,7 +28,6 @@ export default function Pokemon() {
                 res = await axios.get(`${url + pokeId}`);
             }
             
-            console.log("result ", res);
             const species = await axios.get(res.data.species.url);
             const evolutionRes = await axios.get(species.data.evolution_chain.url);
             
@@ -40,7 +39,6 @@ export default function Pokemon() {
                 if(evolves_to.evolves_to.length === 0) break;
                 evolves_to = evolves_to.evolves_to[0];
             }
-            console.log('evolution', evolution)
             setPokemon(res.data);
             setEvolution(evolution);
             setIsLoading(false);
