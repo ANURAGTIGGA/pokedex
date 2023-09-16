@@ -6,6 +6,7 @@ import Home from './components/pages/Home/Home';
 import Pokemon from './components/pages/Pokemon/Pokemon';
 import PokemonList from './components/pages/PokemonList/PokemonList';
 import Layout from './components/layout/Layout/Layout';
+import Legendary from './components/pages/Legendary/Legendary';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/pokemons/:region" element={<PokemonList />} />
           <Route path="/pokemon/:id" element={<Pokemon />} />
+          <Route path="/legendary" element={<Legendary />} />
         </Routes>
       </Layout>
     </div>

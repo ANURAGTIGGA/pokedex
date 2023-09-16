@@ -19,6 +19,16 @@
             justify-content: flex-start;
             li {
                 flex: 1;
+                a{
+                    text-decoration: none;
+                    color: #000;
+                    border: 1px solid transparent;
+                    border-radius: 5px;
+                    padding: 5px;
+                    &.active{
+                        border-color: #000;
+                    }
+                }
             }
         }
     }

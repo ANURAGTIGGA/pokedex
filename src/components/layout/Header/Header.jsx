@@ -1,6 +1,6 @@
 import './header.scss';
 import pokedexLogo from '../../../assets/images/pokedex.png';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useRef, useState, useEffect, useContext } from 'react';
 import axios from "axios";
 import  PokemonContext from "../../../context/pokemonContext.js";
@@ -49,13 +49,23 @@ export default function Header() {
                 </div>
                 <div className="navigation-wrap">
                     <ul>
-                        {
-                            navList.map((item,index)=>{
-                                return (
-                                    <li key={index}>{item}</li>
-                                )
-                            })
-                        }
+                        <li>
+                        <NavLink 
+                            to='/'
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "active" : ""
+                            }
+                        >Home</NavLink>
+                        </li>
+                        <li>
+                        <NavLink 
+                            to='/legendary'
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "active" : ""
+                            }
+                        >Legendary</NavLink>
+                        </li>
+                        <li>Region</li>
                     </ul>
                 </div>
                 <div className="search-wrap">
