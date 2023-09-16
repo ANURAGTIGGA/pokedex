@@ -29,6 +29,26 @@
                         border-color: #000;
                     }
                 }
+                .region-dropdown{
+                    display: flex;
+                    flex-direction: column;
+                    position: absolute;
+                    background-color: aliceblue;
+                    z-index: 5;
+                    text-transform: uppercase;
+                    top: 55px;
+                    height: 200px;
+                    overflow: auto;
+                    -ms-overflow-style: none;  /* IE and Edge */
+                    scrollbar-width: none;  /* Firefox */
+                    &::-webkit-scrollbar {
+                        display: none;
+                      }
+                    a{
+                        color: cornflowerblue;
+                        padding: 10px 20px 10px 10px;
+                    }
+                }
             }
         }
     }

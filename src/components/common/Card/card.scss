@@ -16,6 +16,7 @@
             top: -40px;
             left: 50%;
             transform: translateX(-50%);
+            transition: transform 330ms ease-in-out;
         }
         div.content{
             position: absolute;
@@ -49,5 +50,17 @@
                 font-weight: 600;
             }
         } 
+        &:hover{
+            animation: shake 2s linear;
+            img{
+                transform: translateX(-50%) scale(1.2);
+            }
+        }
     }
+}
+
+@keyframes shake {
+    0% { transform: rotate(2deg); }
+    50% { transform: rotate(-1deg); }
+    100% { transform: rotate(0deg); }
 }

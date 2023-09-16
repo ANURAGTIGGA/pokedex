@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useContext } from "react";
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import regions from '../../../helper/regionData';
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -10,12 +10,14 @@ import './pokemonList.scss';
 
 export default function PokemonList() {
     const {region} = useParams();
+    const [regionName, setRegionName] = useState(region);
     const fetchList = useRef(true);
     const [error, setError] = useState(null);
     const [pokemons, setPokemons] = useState([]);
     const [loading, setLoading] = useState(true);
     const url = "https://pokeapi.co/api/v2/pokemon/";
     const { setSelectedPokemon } = useContext(PokemonContext);
+    const location = useLocation();
 
     useEffect(()=>{
         async function getPokedex() {
@@ -36,7 +38,7 @@ export default function PokemonList() {
             
             fetchPokemons(finalEntries);
         }
-        async function fetchPokemons(entries) {
+        function fetchPokemons(entries) {
             let promises = [];
             for(let i=0;i<entries.length;i++){
                 promises.push(axios.get(url+entries[i]));
@@ -47,12 +49,13 @@ export default function PokemonList() {
                 setLoading(false);
             })
         }
-
-        if(fetchList.current){
+        
+        if(fetchList.current || region !== regionName){
             fetchList.current = false;
             getPokedex();
+            setRegionName(region);
         }
-    },[])
+    },[location])
 
     function onHandleCardClick(pokemon){
         setSelectedPokemon(pokemon);
