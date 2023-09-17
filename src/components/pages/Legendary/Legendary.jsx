@@ -1,37 +1,25 @@
 import { useEffect, useRef, useState, useContext } from "react";
 import legendary from "../../../helper/legendaryData";
-import axios from "axios";
 import Loader from "../../common/Loader/Loader";
 import { Link } from "react-router-dom";
 import Card from "../../common/Card/Card";
 import  PokemonContext from "../../../context/pokemonContext.js";
 import './legendary.scss';
+import { fetchPokemons } from "../../../services";
 
 export default function Legendary() {
     const fetchLegendary = useRef(true);
     const [legendaryPokemons, setLegendaryPokemons] = useState([]);
     const [loading, setLoading] = useState(true);
-    const url = "https://pokeapi.co/api/v2/pokemon/";
     const { setSelectedPokemon } = useContext(PokemonContext);
 
     useEffect(()=>{
-        function fetchLegendaryPokemons() {
-            let promises = legendary.map((pokemon)=>{
-                return axios.get(url+pokemon.name);
-            });
-
-            Promise.allSettled(promises).then((results) => {
-                results = results.filter((res)=>{
-                    return res.value
-                });
+        if(fetchLegendary.current) {
+            fetchLegendary.current = false;
+            fetchPokemons(legendary, 'name').then((results)=>{
                 setLegendaryPokemons(results);
                 setLoading(false);
             })
-        }
-
-        if(fetchLegendary.current) {
-            fetchLegendary.current = false;
-            fetchLegendaryPokemons();
         }
     },[])
 

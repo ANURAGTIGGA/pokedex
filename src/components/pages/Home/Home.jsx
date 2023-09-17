@@ -1,37 +1,27 @@
-import { useContext, useEffect, useRef, useState } from "react"
-import axios from "axios";
+import { useContext, useEffect, useRef, useState } from "react";
 import Card from "../../common/Card/Card";
 import './home.scss';
 import { Link } from "react-router-dom";
 import  PokemonContext from "../../../context/pokemonContext.js";
 import Loader from "../../common/Loader/Loader";
 import Regions from "../../common/Regions/Regions";
+import {fetchPokemons} from "../../../services/index";
 
 export default function Home() {
     const [pokemons, setPokemons] = useState(null);
     const [todaysPokemons, setTodaysPokemons] = useState(null);
     const [loading, setLoading] = useState(true);
-    const url = "https://pokeapi.co/api/v2/pokemon/"//"https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"
     const { setSelectedPokemon } = useContext(PokemonContext);
 
     const shouldFetch = useRef(true);
 
     useEffect(()=>{
-        function fetchPokemons(randomList) {
-            let promises = [];
-            for(let i=0;i<randomList.length;i++){
-                promises.push(axios.get(url+randomList[i]))
-            }
-
-            Promise.all(promises).then((results) => {
+        function fetchTodaysPokemons() {
+            const random = todaysPokemons || generateRandom();
+            fetchPokemons(random).then((results)=>{
                 setPokemons(results);
                 setLoading(false);
             })
-        }
-
-        function fetchTodaysPokemons() {
-            const random = todaysPokemons || generateRandom();
-            fetchPokemons(random);
             setTodaysPokemons(random);
         }
 
@@ -69,8 +59,8 @@ export default function Home() {
             {
                 pokemons && pokemons.map((pokemon)=>{
                     return (
-                        <Link to={`/pokemon/${pokemon.data.id}`} onClick={()=>onHandleCardClick(pokemon)} key={pokemon.data.id} >
-                            <Card pokemon={pokemon}></Card>
+                        <Link to={`/pokemon/${pokemon.value.data.id}`} onClick={()=>onHandleCardClick(pokemon.value)} key={pokemon.value.data.id} >
+                            <Card pokemon={pokemon.value}></Card>
                         </Link>
                     )
                 })
