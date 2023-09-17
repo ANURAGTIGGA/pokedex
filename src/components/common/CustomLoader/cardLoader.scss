@@ -1,0 +1,52 @@
+.loader-card-wrap{
+    width: 300px;
+    height: 300px;
+    padding-top: 50px;
+    margin-bottom: 20px;
+    .card{
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        position: relative;
+        height: 100%;
+        .default-img,.content .id,.content .name,.content .type{
+            animation: custom-loading 1.5s linear infinite alternate;
+            opacity: 0.7;
+        }
+        .default-img{
+            width: 140px;
+            height: 140px;
+            margin: 20px auto;
+            border-radius: 50%;
+            
+        }
+        div.content{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            
+            .id, .name{
+                height: 15px;
+                border-radius: 3px;
+                margin: 10px 30px;
+            }
+            .type{
+                display: inline-block;
+                height: 15px;
+                width: 25%;
+                border-radius: 3px;
+                margin: 0 5px;
+            }
+        }
+    }
+}
+
+@keyframes custom-loading {
+    0% {
+      background-color: hsl(200, 20%, 70%);
+    }
+    100% {
+      background-color: hsl(200, 20%, 95%);
+    }
+}

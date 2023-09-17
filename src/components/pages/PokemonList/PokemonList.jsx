@@ -8,6 +8,7 @@ import  PokemonContext from "../../../context/pokemonContext.js";
 import Loader from "../../common/Loader/Loader";
 import './pokemonList.scss';
 import { fetchPokemons } from "../../../services";
+import CardLoader from "../../common/CustomLoader/CardLoader";
 
 export default function PokemonList() {
     const {region} = useParams();
@@ -66,10 +67,16 @@ export default function PokemonList() {
                     )
                 })
             }
+            {
+                loading && (
+                    <>
+                        <CardLoader></CardLoader>
+                        <CardLoader></CardLoader>
+                        <CardLoader></CardLoader>
+                    </>
+                )
+            }
         </div>
-        {
-            loading && <Loader></Loader>
-        }
         </div>
     )
 }

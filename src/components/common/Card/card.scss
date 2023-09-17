@@ -18,6 +18,13 @@
             transform: translateX(-50%);
             transition: transform 330ms ease-in-out;
         }
+        .default-img{
+            width: 140px;
+            height: 140px;
+            margin: 20px auto;
+            border-radius: 50%;
+            background-image: linear-gradient(to top right, #e5e5e5, #ffffff);
+        }
         div.content{
             position: absolute;
             bottom: 0;

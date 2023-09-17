@@ -10,9 +10,16 @@ export default function Card({pokemon}) {
     return (
         <div className='card-wrap'>
             <div className={pokemon.data.types[0].type.name + ' card'}>
-                <img src={pokemon.data.sprites.other.dream_world.front_default || pokemon.data.sprites.other['official-artwork'].front_default}
-                    onError={imageOnError}
-                />
+                {
+                    (pokemon.data.sprites.other.dream_world.front_default || pokemon.data.sprites.other['official-artwork'].front_default) ? (
+                        <img src={pokemon.data.sprites.other.dream_world.front_default || pokemon.data.sprites.other['official-artwork'].front_default}
+                        />
+                        // onError={imageOnError}
+                    ) : (
+                        <div className='default-img'></div>
+                    )
+                }
+                
                 <div className='content'>
                     <div className='id'>#{pokemon.data.id}</div>
                     <div className='name'>{pokemon.data.name}</div>

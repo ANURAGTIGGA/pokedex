@@ -6,6 +6,7 @@ import  PokemonContext from "../../../context/pokemonContext.js";
 import Loader from "../../common/Loader/Loader";
 import Regions from "../../common/Regions/Regions";
 import {fetchPokemons} from "../../../services/index";
+import CardLoader from "../../common/CustomLoader/CardLoader";
 
 export default function Home() {
     const [pokemons, setPokemons] = useState(null);
@@ -65,6 +66,15 @@ export default function Home() {
                     )
                 })
             }
+            {
+                loading && (
+                <>
+                    <CardLoader></CardLoader>
+                    <CardLoader></CardLoader>
+                    <CardLoader></CardLoader>
+                </>
+                )
+            }
             </div>
             <div>
                 {
@@ -73,7 +83,7 @@ export default function Home() {
             </div>
         </div>
         {
-            loading && <Loader></Loader>
+            // loading && <Loader></Loader>
         }
         </>
     )

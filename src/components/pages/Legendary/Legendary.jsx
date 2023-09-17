@@ -6,6 +6,7 @@ import Card from "../../common/Card/Card";
 import  PokemonContext from "../../../context/pokemonContext.js";
 import './legendary.scss';
 import { fetchPokemons } from "../../../services";
+import CardLoader from "../../common/CustomLoader/CardLoader";
 
 export default function Legendary() {
     const fetchLegendary = useRef(true);
@@ -39,10 +40,16 @@ export default function Legendary() {
                         )
                     })
                 }
-            </div>
-            {
-                loading && <Loader></Loader>
+                {
+                loading && (
+                    <>
+                        <CardLoader></CardLoader>
+                        <CardLoader></CardLoader>
+                        <CardLoader></CardLoader>
+                    </>
+                )
             }
+            </div>
         </div>
     )
 }
