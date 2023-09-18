@@ -1,0 +1,26 @@
+.generic-error-wrap{
+    background-color: aliceblue;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 370px;
+    .error-msg{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .error-img{
+        height: 100px;
+        margin: 20px 0;
+    }
+    .error-cta{
+        background: #1487eb;
+        border-radius: 3px;
+        padding: 10px;
+        color: #ffffff;
+        border: 0;
+        cursor: pointer;
+    }
+}

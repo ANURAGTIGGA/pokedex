@@ -6,6 +6,15 @@
   margin: 0 auto;
   height: 100%;
   .main-content{
-    min-height: calc(100vh - 200px);
+    min-height: calc(100vh - 187px);
+    margin-bottom: 25px;
+  }
+}
+
+html,body{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  &::-webkit-scrollbar {
+      display: none;
   }
 }

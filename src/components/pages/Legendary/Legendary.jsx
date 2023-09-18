@@ -7,25 +7,48 @@ import  PokemonContext from "../../../context/pokemonContext.js";
 import './legendary.scss';
 import { fetchPokemons } from "../../../services";
 import CardLoader from "../../common/CustomLoader/CardLoader";
+import GenericError from "../../common/ErrorState/GenericError";
 
 export default function Legendary() {
     const fetchLegendary = useRef(true);
     const [legendaryPokemons, setLegendaryPokemons] = useState([]);
+    const [error, setError] = useState(false);
+    const [retry, setRetry] = useState(false);
     const [loading, setLoading] = useState(true);
+    const errorMsg = "Something is broken. Failed to load pokemons."
     const { setSelectedPokemon } = useContext(PokemonContext);
 
     useEffect(()=>{
-        if(fetchLegendary.current) {
-            fetchLegendary.current = false;
-            fetchPokemons(legendary, 'name').then((results)=>{
-                setLegendaryPokemons(results);
+        function fetchLegendaryPokemons() {
+            try{
+                fetchPokemons(legendary, 'name').then((results)=>{
+                    if(results.length === 0){
+                        setError(true);
+                    } else {
+                        setLegendaryPokemons(results);
+                        setError(false);
+                    }
+                });
+            } catch(err) {
+                setError(true);
+            } finally {
                 setLoading(false);
-            })
+            }
         }
-    },[])
+        
+        if(fetchLegendary.current || retry) {
+            fetchLegendary.current = false;
+            setRetry(false);
+            fetchLegendaryPokemons();
+        }
+    },[retry])
 
     function onHandleCardClick(pokemon){
         setSelectedPokemon(pokemon);
+    }
+
+    function onHandleError() {
+        setRetry(true);
     }
 
     return (
@@ -41,14 +64,17 @@ export default function Legendary() {
                     })
                 }
                 {
-                loading && (
-                    <>
-                        <CardLoader></CardLoader>
-                        <CardLoader></CardLoader>
-                        <CardLoader></CardLoader>
-                    </>
-                )
-            }
+                    loading && (
+                        <>
+                            <CardLoader></CardLoader>
+                            <CardLoader></CardLoader>
+                            <CardLoader></CardLoader>
+                        </>
+                    )
+                }
+                {
+                    error && <GenericError errorMsg={errorMsg} actionText="Try Again" action={onHandleError}></GenericError>
+                }
             </div>
         </div>
     )

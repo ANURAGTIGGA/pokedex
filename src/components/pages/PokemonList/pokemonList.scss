@@ -6,10 +6,11 @@
 }
 
 .pokemon-list{
-    h1{
+    p.heading{
         text-align: center;
+        font-size: 24px;
         .region-name{
-            text-transform: capitalize;
+            text-transform: uppercase;
         }
     }
 }

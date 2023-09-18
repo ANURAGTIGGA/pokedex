@@ -1,23 +1,20 @@
 import './card.scss';
-import fallbackImg from '../../../assets/images/default.png';
+//import fallbackImg from '../../../assets/images/default.png';
+import {imageOnError} from '../../../helper/getFallbackImg';
 
 export default function Card({pokemon}) {
-    const imageOnError = (event) => {
-        event.currentTarget.src = fallbackImg;
-        event.currentTarget.className = "error";
-    };
+    // const imageOnError = (event) => {
+    //     event.currentTarget.src = fallbackImg;
+    //     event.currentTarget.className = "error";
+    // };
     
     return (
         <div className='card-wrap'>
             <div className={pokemon.data.types[0].type.name + ' card'}>
                 {
-                    (pokemon.data.sprites.other.dream_world.front_default || pokemon.data.sprites.other['official-artwork'].front_default) ? (
-                        <img src={pokemon.data.sprites.other.dream_world.front_default || pokemon.data.sprites.other['official-artwork'].front_default}
-                        />
-                        // onError={imageOnError}
-                    ) : (
-                        <div className='default-img'></div>
-                    )
+                    <img src={pokemon.data.sprites.other.dream_world.front_default || pokemon.data.sprites.other['official-artwork'].front_default}
+                        onError={imageOnError}
+                    />
                 }
                 
                 <div className='content'>

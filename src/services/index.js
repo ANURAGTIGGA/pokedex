@@ -7,7 +7,7 @@ function fetchPokemons(list, name) {
         const path = name ? url+pokemon[name] : url+pokemon;
         return axios.get(path)
     });
-
+    
     return Promise.allSettled(promises).then((results) => {
         results = results.filter((res)=>{
             return res.value;

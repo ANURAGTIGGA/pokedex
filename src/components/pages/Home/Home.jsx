@@ -3,27 +3,40 @@ import Card from "../../common/Card/Card";
 import './home.scss';
 import { Link } from "react-router-dom";
 import  PokemonContext from "../../../context/pokemonContext.js";
-import Loader from "../../common/Loader/Loader";
 import Regions from "../../common/Regions/Regions";
 import {fetchPokemons} from "../../../services/index";
 import CardLoader from "../../common/CustomLoader/CardLoader";
+import GenericError from "../../common/ErrorState/GenericError";
 
 export default function Home() {
     const [pokemons, setPokemons] = useState(null);
     const [todaysPokemons, setTodaysPokemons] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [retry, setRetry] = useState(false);
     const { setSelectedPokemon } = useContext(PokemonContext);
-
+    const errorMsg = "Something is broken. Failed to load pokemons."
     const shouldFetch = useRef(true);
 
     useEffect(()=>{
         function fetchTodaysPokemons() {
-            const random = todaysPokemons || generateRandom();
-            fetchPokemons(random).then((results)=>{
-                setPokemons(results);
+            try{
+                const random = todaysPokemons || generateRandom();
+                fetchPokemons(random).then((results)=>{
+                    if(results.length === 0){
+                        setError(true);
+                    } else {
+                        setPokemons(results);
+                        setError(false);
+                    }
+                })
+                setTodaysPokemons(random);
+            }
+            catch(err) {
+                setError(true);
+            } finally {
                 setLoading(false);
-            })
-            setTodaysPokemons(random);
+            }
         }
 
         function generateRandom() {
@@ -41,15 +54,20 @@ export default function Home() {
 
             return random;
         }
-
-        if(shouldFetch.current){
+        
+        if(shouldFetch.current || retry){
             shouldFetch.current = false;
+            setRetry(false);
             fetchTodaysPokemons();
         }
-    },[])
+    },[retry])
 
     function onHandleCardClick(pokemon){
         setSelectedPokemon(pokemon);
+    }
+
+    function onHandleError() {
+        setRetry(true);
     }
 
     return (
@@ -75,6 +93,9 @@ export default function Home() {
                 </>
                 )
             }
+            {
+                error && <GenericError errorMsg={errorMsg} actionText="Try Again" action={onHandleError}></GenericError>
+            }
             </div>
             <div>
                 {
@@ -82,9 +103,6 @@ export default function Home() {
                 }
             </div>
         </div>
-        {
-            // loading && <Loader></Loader>
-        }
         </>
     )
 }

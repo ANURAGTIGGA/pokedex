@@ -5,58 +5,98 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Card from "../../common/Card/Card";
 import  PokemonContext from "../../../context/pokemonContext.js";
-import Loader from "../../common/Loader/Loader";
 import './pokemonList.scss';
 import { fetchPokemons } from "../../../services";
 import CardLoader from "../../common/CustomLoader/CardLoader";
+import GenericError from "../../common/ErrorState/GenericError";
 
 export default function PokemonList() {
+    const errorState = {
+        "errorMsg": "Something is broken. Failed to load pokemons.",
+        "state": false
+    }
     const {region} = useParams();
     const [regionName, setRegionName] = useState(region);
     const fetchList = useRef(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(errorState);
+    const [retry, setRetry] = useState(false);
     const [pokemons, setPokemons] = useState([]);
     const [loading, setLoading] = useState(true);
     const { setSelectedPokemon } = useContext(PokemonContext);
     const location = useLocation();
+    
 
     useEffect(()=>{
         async function getPokedex() {
-            const pokedex = regions.filter((item)=>{
-                if(item.name === region.toLowerCase()) return item;
-                else{
-                    setError('404');
+            try{
+                const pokedex = regions.filter((item)=>{
+                    if(item.name === region.toLowerCase()) return item;
+                });
+                if(pokedex.length === 0) {
+                    setError({
+                        "errorMsg": "Invalid route. No such region found!",
+                        "state": true
+                    });
+                    setLoading(false);
+                } else {
+                    const entries = await axios.get(pokedex[0].pokedex);
+                    filterEntries(entries.data.pokemon_entries);
+                    setError({
+                        ...error,
+                        "state": false
+                    });
                 }
-            });
-            const entries = await axios.get(pokedex[0].pokedex);
-            filterEntries(entries.data.pokemon_entries);
+            } catch(err) {
+                setError(errorState);
+            }
         }
         function filterEntries(entries) {
-            const finalEntries = entries.map((entry)=>{
-                const item = entry.pokemon_species.url.split('/');
-                return item[item.length-2]
-            })
-            
-            fetchPokemons(finalEntries).then((results) => {
-                setPokemons(results);
+            try{
+                const finalEntries = entries.map((entry)=>{
+                    const item = entry.pokemon_species.url.split('/');
+                    return item[item.length-2]
+                })
+                
+                fetchPokemons(finalEntries).then((results) => {
+                    if(results.length === 0){
+                        setError({
+                            ...errorState,
+                            "state": true
+                        });
+                    } else {
+                        setPokemons(results);
+                        setError({
+                            ...error,
+                            "state": false
+                        });
+                    }
+                })
+            } catch(err) {
+                setError(errorState);
+            } finally {
                 setLoading(false);
-            })
+            }
         }
         
-        if(fetchList.current || region !== regionName){
+        if(fetchList.current || region !== regionName || retry){
+            setLoading(true);
             fetchList.current = false;
             getPokedex();
             setRegionName(region);
         }
-    },[location])
+    },[location, retry])
 
     function onHandleCardClick(pokemon){
         setSelectedPokemon(pokemon);
     }
 
+    function onHandleError() {
+        setRetry(true);
+    }
+
     return (
         <div className='pokemon-list'>
-        <h1>Pokemons from <span className='region-name'>{region}</span> region</h1>
+        <p className="heading">Pokemons from <span className='region-name'>{region}</span> region</p>
         <div className='pokemon-container'>
             {
                 pokemons && pokemons.map((pokemon)=>{
@@ -75,6 +115,9 @@ export default function PokemonList() {
                         <CardLoader></CardLoader>
                     </>
                 )
+            }
+            {
+                error.state && <GenericError errorMsg={error.errorMsg} actionText="Try Again" action={onHandleError}></GenericError>
             }
         </div>
         </div>

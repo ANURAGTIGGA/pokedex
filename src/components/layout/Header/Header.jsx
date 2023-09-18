@@ -1,16 +1,19 @@
 import './header.scss';
 import pokedexLogo from '../../../assets/images/pokedex.png';
+import logo from '../../../assets/images/logo_small.png';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useRef, useState, useEffect, useContext } from 'react';
 import axios from "axios";
 import  PokemonContext from "../../../context/pokemonContext.js";
 import regions from '../../../helper/regionData';
+import pokeball from '../../../assets/images/pokeball-loader.png'
 
 export default function Header() {
-    const navList = ['Home', 'Legendary', 'Type'];
     const [inputPokemon, setInputPokemon] = useState('');
     const [showRegionDropDown, setShowRegionDropDown] = useState(false);
     const [regionActive, setRegionActive] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const pokemonRef = useRef('');
     const navigate = useNavigate();
     const url = "https://pokeapi.co/api/v2/pokemon/";
@@ -28,10 +31,21 @@ export default function Header() {
 
     useEffect(()=>{
         async function fetchPokemon() {
-            const res = await axios.get(`${url + inputPokemon}`);
-            console.log('search pokemon', res);
-            await setSelectedPokemon(res);
-            navigate('/pokemon/'+inputPokemon);
+            try{
+                const res = await axios.get(`${url + inputPokemon}`);
+                console.log('search pokemon', res);
+                await setSelectedPokemon(res);
+                navigate('/pokemon/'+inputPokemon);
+            } catch(err) {
+                setError(true);
+                setTimeout(()=>{
+                    setError(false);
+                    pokemonRef.current.value = "";
+                }, 2000)
+            } finally{
+                pokemonRef.current.value = "";
+                setLoading(false);
+            }
         }
 
         if(shouldFetch.current){
@@ -43,10 +57,10 @@ export default function Header() {
     function redirectToPokemonPage() {
         const input = pokemonRef.current.value;
         if(input.length){
+            setLoading(true);
             setInputPokemon(input);
             shouldFetch.current = true;
-            pokemonRef.current.value = "";
-            //navigate('/pokemon/'+input);
+            setError(false);
         }
     }
 
@@ -56,7 +70,7 @@ export default function Header() {
                 <div className="logo-wrap">
                     <Link to="/">
                         <img src={pokedexLogo} />
-                        <span></span>
+                        <img src={logo} />
                     </Link>
                 </div>
                 <div className="navigation-wrap">
@@ -98,8 +112,17 @@ export default function Header() {
                     </ul>
                 </div>
                 <div className="search-wrap">
-                    <input ref={pokemonRef} type="text" placeholder="Search a Pokemon"></input>
-                    <button onClick={redirectToPokemonPage}>Go</button>
+                    <div className={error ? 'error input-wrap' : 'input-wrap'}>
+                        <input ref={pokemonRef} type="text" placeholder="Search a Pokemon"></input>
+                        <span className='error-msg'>Pokemon not found.</span>
+                    </div>
+                    {
+                        loading ? (
+                            <img className='search-loading' src={pokeball} />
+                        ) : (
+                            <button onClick={redirectToPokemonPage}>Go</button>
+                        )
+                    }
                 </div>
             </div>
         </header>

@@ -17,13 +17,11 @@
             left: 50%;
             transform: translateX(-50%);
             transition: transform 330ms ease-in-out;
-        }
-        .default-img{
-            width: 140px;
-            height: 140px;
-            margin: 20px auto;
-            border-radius: 50%;
-            background-image: linear-gradient(to top right, #e5e5e5, #ffffff);
+            &.error{
+                max-width: 150px;
+                max-height: 150px;
+                top: 20px;
+            }
         }
         div.content{
             position: absolute;

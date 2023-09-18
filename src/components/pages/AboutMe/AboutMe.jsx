@@ -15,7 +15,7 @@ export default function AboutMe() {
             <p>Apart from work I really enjoy running, calisthenics and basketball.</p>
             <div className="social-wrap">
                 <p>Find me on 
-                    <a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/anurag-aron-tigga-972367186?trk=profile-badge" target="_blank">
+                    <a className="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/anurag-aron-tigga-972367186?trk=profile-badge" target="_blank">
                         <img className="linkenin" src={linkedInImg} />
                     </a>
                 </p>
