@@ -116,7 +116,7 @@ export default function Pokemon() {
                                             return (
                                                 <div key={item.id} className='pokemon'>
                                                     <Link to={`/pokemon/${item.id}`}>
-                                                        <img onClick={()=>onHandleEvolutionClick(item.id)} src={pokemon.sprites.other.dream_world.front_default || pokemon.sprites.other['official-artwork'].front_default} 
+                                                        <img onClick={()=>onHandleEvolutionClick(item.id)} src={item.url || item.fallback} 
                                                             onError={imageOnError}
                                                         ></img>
                                                     </Link>

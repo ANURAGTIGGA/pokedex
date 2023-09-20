@@ -1,6 +1,7 @@
 .header-container{
-    padding: 15px 0 10px;
+    padding: 15px 15px 10px 0px;
     display: flex;
+    gap: 10px;
     > * { 
         flex: 1; 
     }
@@ -17,8 +18,14 @@
             list-style: none;
             display: flex;
             justify-content: flex-start;
+            padding: 0;
+            align-items: center;
+            text-align: center;
             li {
                 flex: 1;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
                 a{
                     text-decoration: none;
                     color: #000;
@@ -110,5 +117,22 @@
     }
     to {
        transform: rotate(360deg);
+    }
+ }
+
+
+ @media only screen and (min-width: 769px) and (max-width: 1024px){
+    .header-container{
+        .navigation-wrap{
+            flex: 2;
+        }
+        .search-wrap{
+            flex: 1;
+            .input-wrap{
+                input{
+                    width: 210px;
+                }
+            }
+        }
     }
  }

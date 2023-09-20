@@ -50,3 +50,28 @@
       background-color: hsl(200, 20%, 95%);
     }
 }
+
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    .loader-card-wrap{
+        width: 230px;
+        height: 275px;
+        padding-top: 40px;
+        .card{
+            .default-img {
+                max-width: 200px;
+                max-height: 200px;
+            }
+            div.content{
+                .id, .name{
+                    height: 13px;
+                    border-radius: 2px;
+                }
+                .type{
+                    height: 13px;
+                    width: 25%;
+                    border-radius: 2px;
+                }
+            }
+        }
+    }
+}

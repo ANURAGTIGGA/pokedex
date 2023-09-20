@@ -95,3 +95,35 @@
 
     }
 }
+
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    #pokemon{
+        padding-top: 45px;
+        .card{
+            height: 420px;
+            img.pokemon-img{
+                max-width: 340px;
+            }
+            .content{
+                .stats{
+                    .stat{
+                        &.abilities{
+                            flex: 1;
+                            .value{
+                                width: 170px;
+                            }
+                        }
+                    }
+                }
+                .evolutions{
+                    .pokemon{
+                        img{
+                            height: 65px;
+                            width: 65px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

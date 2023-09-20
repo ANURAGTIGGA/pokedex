@@ -10,3 +10,15 @@
         flex-basis: 370px;
     }
 }
+
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    #home{
+        h1{
+            margin: 0;
+            font-size: 28px;
+        }
+        .todays-pokemons{
+            flex-basis: 345px;
+        }
+    }
+}

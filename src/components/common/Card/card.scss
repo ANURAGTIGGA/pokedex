@@ -69,3 +69,29 @@
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(0deg); }
 }
+
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    .card-wrap{
+        width: 230px;
+        height: 275px;
+        padding-top: 40px;
+        .card{
+            img{
+                max-width: 200px;
+                max-height: 200px;
+                &.error{
+                    max-width: 130px;
+                    max-height: 130px;
+                }
+            }
+            div.content{
+                .id{
+                    font-size: 20px;
+                }
+                .name{
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+}
