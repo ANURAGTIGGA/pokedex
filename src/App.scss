@@ -26,3 +26,24 @@ html,body{
     }
   }
 }
+
+@media only screen and (min-width: 600px) and (max-width: 769px){
+  .App {
+    .main-content{
+      padding: 0 15px;
+      min-height: calc(100vh - 160px);
+      margin-bottom: 0px;
+    }
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .App {
+    .main-content{
+      padding: 0 15px;
+      min-height: calc(100vh - 173px);
+      margin-bottom: 0px;
+    }
+  }
+}

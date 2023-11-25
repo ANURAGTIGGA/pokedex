@@ -95,3 +95,56 @@
         }
     }
 }
+
+@media only screen and (min-width: 600px) and (max-width: 769px){
+    .card-wrap{
+        width: 185px;
+        height: 250px;
+        padding-top: 35px;
+        .card{
+            img{
+                max-width: 180px;
+                max-height: 180px;
+                &.error{
+                    max-width: 120px;
+                    max-height: 120px;
+                }
+            }
+            div.content{
+                .id{
+                    font-size: 18px;
+                }
+                .name{
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+}
+
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    .card-wrap{
+        width: 185px;
+        height: 250px;
+        padding-top: 35px;
+        .card{
+            img{
+                max-width: 180px;
+                max-height: 180px;
+                &.error{
+                    max-width: 120px;
+                    max-height: 120px;
+                }
+            }
+            div.content{
+                .id{
+                    font-size: 18px;
+                }
+                .name{
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+ }

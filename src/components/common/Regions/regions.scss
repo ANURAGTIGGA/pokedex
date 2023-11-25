@@ -40,3 +40,26 @@
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
+
+@media only screen and (min-width: 600px) and (max-width: 769px){
+    .regions{
+        p.regions-note{
+            font-size: 16px;
+        }
+        img{
+           height: 65px;
+        }
+    }
+}
+
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    .regions{
+        p.regions-note{
+            font-size: 14px;
+        }
+        img{
+           height: 65px;
+        }
+    }
+ }

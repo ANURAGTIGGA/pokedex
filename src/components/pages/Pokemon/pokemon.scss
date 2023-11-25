@@ -127,3 +127,95 @@
         }
     }
 }
+
+@media only screen and (min-width: 600px) and (max-width: 769px){
+    #pokemon{
+        padding-top: 20px;
+        .card{
+            height: 420px;
+            img.pokemon-img{
+                max-width: 250px;
+            }
+            img.error{
+                padding: 60px 25px;
+                width: 180px;
+                height: 180px;
+            }
+            .content{
+                padding-left: 0px;
+                .id{
+                    font-size: 20px;
+                }
+                .name{
+                    font-size: 32px;
+                }
+                .stats{
+                    flex-wrap: wrap;
+                    .stat{
+                        &.abilities{
+                            flex: 1;
+                            .value{
+                                width: 200px;
+                            }
+                        }
+                    }
+                }
+                .evolutions{
+                    .pokemon{
+                        img{
+                            height: 50px;
+                            width: 45px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    #pokemon{
+        padding-top: 35px;
+        .card{
+            height: auto;
+            flex-direction: column;
+            img.pokemon-img{
+                max-width: 250px;
+            }
+            img.error{
+                padding: 60px 25px;
+                width: 180px;
+                height: 180px;
+            }
+            .content{
+                padding-top: 0;
+                .id{
+                    font-size: 20px;
+                }
+                .name{
+                    font-size: 32px;
+                }
+                .stats{
+                    flex-wrap: wrap;
+                    .stat{
+                        &.abilities{
+                            flex: 1;
+                            .value{
+                                width: 200px;
+                            }
+                        }
+                    }
+                }
+                .evolutions{
+                    .pokemon{
+                        img{
+                            height: 50px;
+                            width: 45px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+ }

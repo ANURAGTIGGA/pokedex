@@ -75,3 +75,54 @@
         }
     }
 }
+
+@media only screen and (min-width: 600px) and (max-width: 769px){
+    .loader-card-wrap{
+        width: 185px;
+        height: 250px;
+        padding-top: 35px;
+        .card{
+            .default-img {
+                max-width: 180px;
+                max-height: 180px;
+            }
+            div.content{
+                .id, .name{
+                    height: 12px;
+                    border-radius: 2px;
+                }
+                .type{
+                    height: 12px;
+                    width: 25%;
+                    border-radius: 2px;
+                }
+            }
+        }
+    }
+}
+
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    .loader-card-wrap{
+        width: 185px;
+        height: 250px;
+        padding-top: 35px;
+        .card{
+            .default-img {
+                max-width: 180px;
+                max-height: 180px;
+            }
+            div.content{
+                .id, .name{
+                    height: 12px;
+                    border-radius: 2px;
+                }
+                .type{
+                    height: 12px;
+                    width: 25%;
+                    border-radius: 2px;
+                }
+            }
+        }
+    }
+ }
