@@ -4,10 +4,14 @@
     padding-top: 50px;
     margin-bottom: 20px;
     .card{
-        border: 1px solid #ccc;
+        //border: 1px solid #ccc;
         border-radius: 5px;
         position: relative;
         height: 100%;
+        //background-color: hsl(200deg 28.98% 96.66%);
+        background-image: linear-gradient(to top right, #ebf0f3, #f4f7f9);
+        padding-top: 25px;
+        box-sizing: border-box;
         .default-img,.content .id,.content .name,.content .type{
             animation: custom-loading 1.5s linear infinite alternate;
             opacity: 0.7;
@@ -29,7 +33,7 @@
             .id, .name{
                 height: 15px;
                 border-radius: 3px;
-                margin: 10px 30px;
+                margin: 10px 12%;
             }
             .type{
                 display: inline-block;

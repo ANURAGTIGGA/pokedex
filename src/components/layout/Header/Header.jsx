@@ -1,6 +1,5 @@
 import './header.scss';
 import pokedexLogo from '../../../assets/images/pokedex.png';
-import logo from '../../../assets/images/logo_small.png';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useRef, useState, useEffect, useContext } from 'react';
 import axios from "axios";
@@ -70,7 +69,18 @@ export default function Header() {
                 <div className="logo-wrap">
                     <Link to="/">
                         <img src={pokedexLogo} />
-                        <img src={logo} />
+                        <svg viewBox="0 0 300 150">
+                            <defs>
+                                {/* <!-- Top half of a circle (arc) --> */}
+                                <path id="topCurve" d="M 50,100 A 150,100 0 0,1 250,100" />
+                            </defs>
+
+                            <text>
+                                <textPath href="#topCurve" startOffset="50%" text-anchor="middle">
+                                    POKEDEX
+                                </textPath>
+                            </text>
+                            </svg>
                     </Link>
                 </div>
                 <div className="navigation-wrap">

@@ -63,8 +63,10 @@ export default function PokemonList() {
                             ...errorState,
                             "state": true
                         });
+                        setLoading(false);
                     } else {
                         setPokemons(results);
+                        setLoading(false);
                         setError({
                             ...error,
                             "state": false
@@ -73,7 +75,6 @@ export default function PokemonList() {
                 })
             } catch(err) {
                 setError(errorState);
-            } finally {
                 setLoading(false);
             }
         }
@@ -99,7 +100,7 @@ export default function PokemonList() {
         <p className="heading">Pokemons from <span className='region-name'>{region}</span> region</p>
         <div className='pokemon-container'>
             {
-                pokemons && pokemons.map((pokemon)=>{
+                !loading && pokemons && pokemons.map((pokemon)=>{
                     return (
                         <Link to={`/pokemon/${pokemon.value.data.id}`} onClick={()=>onHandleCardClick(pokemon.value)} key={pokemon.value.data.id} >
                             <Card pokemon={pokemon.value}></Card>

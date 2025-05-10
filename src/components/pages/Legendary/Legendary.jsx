@@ -37,6 +37,7 @@ export default function Legendary() {
         }
         
         if(fetchLegendary.current || retry) {
+            setLoading(true);
             fetchLegendary.current = false;
             setRetry(false);
             fetchLegendaryPokemons();
@@ -55,7 +56,7 @@ export default function Legendary() {
         <div className='legendary-pokemons'>
             <div className='legendary-pokemons-container'>
                 {
-                    legendaryPokemons && legendaryPokemons.map((pokemon)=>{
+                    !loading && legendaryPokemons && legendaryPokemons.map((pokemon)=>{
                         return (
                             <Link to={`/pokemon/${pokemon.value.data.id}`} onClick={()=>onHandleCardClick(pokemon.value)} key={pokemon.value.data.id} >
                                 <Card pokemon={pokemon.value}></Card>
