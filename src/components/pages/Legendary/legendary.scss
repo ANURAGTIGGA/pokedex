@@ -1,15 +1,31 @@
-.legendary-pokemons-container{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 10px;
+.legendary-pokemons{
+    p.heading{
+        text-align: center;
+        font-size: 24px;
+    }
+    .legendary-pokemons-container{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 }
 
-// .pokemon-list{
-//     h1{
-//         text-align: center;
-//         .region-name{
-//             text-transform: capitalize;
-//         }
-//     }
-// }
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    .legendary-pokemons p.heading {
+        font-size: 22px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 769px){
+    .legendary-pokemons p.heading {
+        font-size: 18px;
+    }
+}
+
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    .legendary-pokemons p.heading {
+        font-size: 14px;
+    }
+ }

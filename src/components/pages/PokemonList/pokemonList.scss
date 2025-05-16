@@ -14,3 +14,22 @@
         }
     }
 }
+
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    .pokemon-list p.heading {
+        font-size: 22px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 769px){
+    .pokemon-list p.heading {
+        font-size: 18px;
+    }
+}
+
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    .pokemon-list p.heading {
+        font-size: 14px;
+    }
+ }

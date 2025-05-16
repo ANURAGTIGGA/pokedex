@@ -9,6 +9,7 @@ import './pokemonList.scss';
 import { fetchPokemons } from "../../../services";
 import CardLoader from "../../common/CustomLoader/CardLoader";
 import GenericError from "../../common/ErrorState/GenericError";
+import ScrollToTop from "../../common/ScrollTop/ScrollToTop";
 
 export default function PokemonList() {
     const errorState = {
@@ -24,7 +25,11 @@ export default function PokemonList() {
     const [loading, setLoading] = useState(true);
     const { setSelectedPokemon } = useContext(PokemonContext);
     const location = useLocation();
-    
+    const targetRef = useRef();
+
+    useEffect(() => {
+        scrollTop();
+      }, []);
 
     useEffect(()=>{
         async function getPokedex() {
@@ -85,7 +90,11 @@ export default function PokemonList() {
             getPokedex();
             setRegionName(region);
         }
-    },[location, retry])
+    },[location, retry]);
+
+    function scrollTop() {
+        window.scrollTo(0, 0);
+    }
 
     function onHandleCardClick(pokemon){
         setSelectedPokemon(pokemon);
@@ -97,7 +106,7 @@ export default function PokemonList() {
 
     return (
         <div className='pokemon-list'>
-        <p className="heading">Pokemons from <span className='region-name'>{region}</span> region</p>
+        <p ref={targetRef} className="heading">Pokemons from <span className='region-name'>{region}</span> region</p>
         <div className='pokemon-container'>
             {
                 !loading && pokemons && pokemons.map((pokemon)=>{
@@ -121,6 +130,7 @@ export default function PokemonList() {
                 error.state && <GenericError errorMsg={error.errorMsg} actionText="Try Again" action={onHandleError}></GenericError>
             }
         </div>
+        {<ScrollToTop targetRef={targetRef.current} ></ScrollToTop>}
         </div>
     )
 }

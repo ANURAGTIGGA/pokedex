@@ -1,4 +1,4 @@
-import loader from "../../../assets/images/pokeball.png";
+import loader from "../../../assets/images/pokeball-loader.png";
 import './loader.scss';
 
 export default function Loader() {

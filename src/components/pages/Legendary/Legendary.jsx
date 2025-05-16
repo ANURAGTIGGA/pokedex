@@ -8,6 +8,7 @@ import './legendary.scss';
 import { fetchPokemons } from "../../../services";
 import CardLoader from "../../common/CustomLoader/CardLoader";
 import GenericError from "../../common/ErrorState/GenericError";
+import ScrollToTop from "../../common/ScrollTop/ScrollToTop.jsx";
 
 export default function Legendary() {
     const fetchLegendary = useRef(true);
@@ -17,6 +18,7 @@ export default function Legendary() {
     const [loading, setLoading] = useState(true);
     const errorMsg = "Something is broken. Failed to load pokemons."
     const { setSelectedPokemon } = useContext(PokemonContext);
+    const targetRef = useRef();
 
     useEffect(()=>{
         function fetchLegendaryPokemons() {
@@ -54,6 +56,7 @@ export default function Legendary() {
 
     return (
         <div className='legendary-pokemons'>
+            <p ref={targetRef} className="heading">Rare and Powerful Pokemons from all regions</p>
             <div className='legendary-pokemons-container'>
                 {
                     !loading && legendaryPokemons && legendaryPokemons.map((pokemon)=>{
@@ -77,6 +80,7 @@ export default function Legendary() {
                     error && <GenericError errorMsg={errorMsg} actionText="Try Again" action={onHandleError}></GenericError>
                 }
             </div>
+            {<ScrollToTop targetRef={targetRef.current} ></ScrollToTop>}
         </div>
     )
 }
