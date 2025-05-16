@@ -73,7 +73,7 @@ export default function Home() {
     return (
         <>
         <div id='home'>
-            <h1>TODAY'S POKEMONS</h1>
+            <h1>Your POKEMONS for the day</h1>
             <div className='todays-pokemons'>
             {
                 pokemons && pokemons.map((pokemon)=>{
