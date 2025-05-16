@@ -233,3 +233,14 @@
         }
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .header-container {
+        .search-wrap .input-wrap input {
+            max-width: 120px;
+        }
+        .navigation-wrap ul {
+            font-size: 12px;
+        }
+    }
+}
