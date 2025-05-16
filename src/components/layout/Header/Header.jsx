@@ -19,6 +19,7 @@ export default function Header() {
     const shouldFetch = useRef(false);
     const { setSelectedPokemon } = useContext(PokemonContext);
     const location = useLocation();
+    const windowWidth = useRef(window.innerWidth);
 
     useEffect(()=>{
         if(location.pathname.includes('pokemons/')){
@@ -101,7 +102,7 @@ export default function Header() {
                             }
                         >Legendary</NavLink>
                         </li>
-                        <li onMouseEnter={()=>setShowRegionDropDown(true)} onMouseLeave={()=>setShowRegionDropDown(false)}>
+                        <li className='header-region' onMouseEnter={()=>setShowRegionDropDown(true)} onMouseLeave={()=>setShowRegionDropDown(false)}>
                             <a className={regionActive ? 'active' : ''}>Region</a>
                             {
                                 showRegionDropDown && (
@@ -123,7 +124,7 @@ export default function Header() {
                 </div>
                 <div className="search-wrap">
                     <div className={error ? 'error input-wrap' : 'input-wrap'}>
-                        <input ref={pokemonRef} type="text" placeholder="Search a Pokemon"></input>
+                        <input ref={pokemonRef} type="text" placeholder={windowWidth.current > 600 ? "Search a Pokemon" : "Search"}></input>
                         <span className='error-msg'>Pokemon not found.</span>
                     </div>
                     {
